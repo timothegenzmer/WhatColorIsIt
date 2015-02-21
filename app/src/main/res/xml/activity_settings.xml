@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <ListPreference
+      android:key="pref_screenposition"
+      android:title="@string/pref_screenposition"
+      android:dialogTitle="@string/pref_screenposition"
+      android:entries="@array/pref_screenposition_entries"
+      android:entryValues="@array/pref_screenposition_values"
+      android:defaultValue="@string/pref_screenposition_default"/>
+
+  <ListPreference
+      android:key="pref_coloroptions"
+      android:title="@string/pref_coloroptions"
+      android:dialogTitle="@string/pref_coloroptions"
+      android:entries="@array/pref_coloroptions_entries"
+      android:entryValues="@array/pref_coloroptions_values"
+      android:defaultValue="@string/pref_coloroptions_default"/>
+</PreferenceScreen>
