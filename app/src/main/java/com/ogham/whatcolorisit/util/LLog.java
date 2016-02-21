@@ -17,27 +17,83 @@ public abstract class LLog {
         }
     }
 
-    public abstract int d(String msg);
+    /**
+     * Send a {@link Log#VERBOSE} log message.
+     *
+     * @param msg
+     *         The message you would like logged.
+     */
+    public abstract int v(String msg);
 
-    public abstract int d(String msg, Throwable tr);
-
-    public abstract int e(String msg);
-
-    public abstract int e(String msg, Throwable tr);
-
-    public abstract int i(String msg);
-
-    public abstract int i(String msg, Throwable tr);
-
+    /**
+     * Send a {@link Log#VERBOSE} log message and log the exception.
+     *
+     * @param msg
+     *         The message you would like logged.
+     * @param tr
+     *         An exception to log
+     */
     public abstract int v(String msg, Throwable tr);
 
-    public abstract int v(String msg);
+    /**
+     * Send a {@link Log#DEBUG} log message.
+     *
+     * @param msg
+     *         The message you would like logged.
+     */
+    public abstract int d(String msg);
+
+    /**
+     * Send a {@link Log#DEBUG} log message and log the exception.
+     *
+     * @param msg
+     *         The message you would like logged.
+     * @param tr
+     *         An exception to log
+     */
+    public abstract int d(String msg, Throwable tr);
+
+    /**
+     * Send an {@link Log#INFO} log message.
+     *
+     * @param msg
+     *         The message you would like logged.
+     */
+    public abstract int i(String msg);
+
+    /**
+     * Send a {@link Log#INFO} log message and log the exception.
+     *
+     * @param msg
+     *         The message you would like logged.
+     * @param tr
+     *         An exception to log
+     */
+    public abstract int i(String msg, Throwable tr);
+
+    /**
+     * Send a {@link Log#WARN} log message.
+     *
+     * @param msg
+     *         The message you would like logged.
+     */
+    public abstract int w(String msg);
+
+    /**
+     * Send a {@link Log#WARN} log message and log the exception.
+     *
+     * @param msg
+     *         The message you would like logged.
+     * @param tr
+     *         An exception to log
+     */
+    public abstract int w(String msg, Throwable tr);
 
     public abstract int w(Throwable tr);
 
-    public abstract int w(String msg, Throwable tr);
+    public abstract int e(String msg, Throwable tr);
 
-    public abstract int w(String msg);
+    public abstract int e(String msg);
 
     public abstract int wtf(Throwable tr);
 
@@ -124,6 +180,9 @@ public abstract class LLog {
         }
     }
 
+    /**
+     * Logger that will be used during release <br/> This logger wont log anything
+     */
     private static class ReleaseLogger extends LLog {
 
         @Override
