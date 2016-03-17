@@ -2,6 +2,7 @@ package com.ogham.whatcolorisit.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.ogham.whatcolorisit.data.FullRangeColor;
 import com.ogham.whatcolorisit.data.LightColor;
@@ -12,13 +13,13 @@ import com.ogham.whatcolorisit.util.LLog;
 /**
  * Created by Timothe on 21.12.2014.
  */
-public class PreferenceManager {
-    private static final LLog LOG = LLog.getLogger(PreferenceManager.class);
+public class WallpaperPreferenceManager {
+    private static final LLog LOG = LLog.getLogger(WallpaperPreferenceManager.class);
 
     private SharedPreferences sharedPref;
 
-    public PreferenceManager(Context context) {
-        sharedPref = android.preference.PreferenceManager.getDefaultSharedPreferences(context);
+    public WallpaperPreferenceManager(Context context) {
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public ScreenPositions getScreenPosition() {

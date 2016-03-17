@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
 import com.ogham.whatcolorisit.data.TimeColorUtil;
-import com.ogham.whatcolorisit.preference.PreferenceManager;
+import com.ogham.whatcolorisit.preference.WallpaperPreferenceManager;
 import com.ogham.whatcolorisit.preference.ScreenPositions;
 import com.ogham.whatcolorisit.util.LLog;
 
@@ -25,7 +25,7 @@ public class WhatColorIsItWallpaper {
     private Paint backGroundPaint;
     private TimeColorUtil timeColor;
 
-    private PreferenceManager manager;
+    private WallpaperPreferenceManager manager;
 
     private ScreenPositions positions;
 
@@ -43,7 +43,7 @@ public class WhatColorIsItWallpaper {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(150);
 
-        manager = new PreferenceManager(context);
+        manager = new WallpaperPreferenceManager(context);
         loadOptions();
     }
 
