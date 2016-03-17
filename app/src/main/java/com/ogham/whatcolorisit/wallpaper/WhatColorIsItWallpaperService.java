@@ -40,6 +40,16 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
 
             handler = new Handler();
             handler.post(drawRunner);
+
+        }
+
+        @Override
+        public void onOffsetsChanged(float xOffset, float yOffset, float xOffsetStep, float yOffsetStep, int xPixelOffset, int yPixelOffset) {
+            super.onOffsetsChanged(xOffset, yOffset, xOffsetStep, yOffsetStep, xPixelOffset, yPixelOffset);
+            wallpaper.onOffsetChanged(xOffset);
+            if(visible) {
+                wallpaper.draw(getSurfaceHolder());
+            }
         }
 
         @Override

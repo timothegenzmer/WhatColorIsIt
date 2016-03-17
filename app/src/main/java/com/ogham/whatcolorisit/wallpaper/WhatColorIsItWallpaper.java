@@ -17,7 +17,12 @@ import com.ogham.whatcolorisit.util.LLog;
 public class WhatColorIsItWallpaper {
     private static final LLog LOG = LLog.getLogger(WhatColorIsItWallpaper.class);
 
+    private static final float TIME_TO_SCREEN_RATIO = 0.85f;
     private static final float TIME_CODE_RATIO = 0.25f;
+
+    private static final float MOVEMENT = 0.95f - TIME_TO_SCREEN_RATIO;
+
+    private static final String MEASURMENT_STRING = "00:00:00";
 
     private Paint textPaint;
     private Paint backGroundPaint;
@@ -29,6 +34,11 @@ public class WhatColorIsItWallpaper {
 
     private int width;
     private int height;
+
+    /**
+     * number between 0 and 1
+     */
+    private float currentStep;
 
     public WhatColorIsItWallpaper(Context context) {
         backGroundPaint = new Paint();
@@ -74,7 +84,7 @@ public class WhatColorIsItWallpaper {
     }
 
     private void drawTime(Canvas canvas) {
-        canvas.drawText(timeColor.getTimeText(), width / 2, height * positions.screenPosition, textPaint);
+        canvas.drawText(timeColor.getTimeText(), getTextPosition(), height * positions.screenPosition, textPaint);
     }
 
     private void drawColorCode(Canvas canvas, int color) {
@@ -83,8 +93,20 @@ public class WhatColorIsItWallpaper {
         //remove alpha value
         color = color & 0xFFFFFF;
         String colorText = String.format("#%06X", color);
-        canvas.drawText(colorText, width / 2, height * positions.screenPosition + currentTextSize / 2, textPaint);
+        canvas.drawText(colorText, getTextPosition(), height * positions.screenPosition + currentTextSize / 2, textPaint);
         textPaint.setTextSize(currentTextSize);
+    }
+
+    private int getTextPosition() {
+        return width / 2 - getStepOffset();
+    }
+
+    private int getStepOffset() {
+        return (int) ((currentStep - 0.5) * width * MOVEMENT);
+    }
+
+    public void onOffsetChanged(float currentStep) {
+        this.currentStep = currentStep;
     }
 
     public void onSizeChanged(int width, int height) {
@@ -97,15 +119,14 @@ public class WhatColorIsItWallpaper {
         float lowerBound = 1;
         float upperBound = 1000;
 
-        //90% of width
-        float aim = width * 0.9f;
+        float aim = width * TIME_TO_SCREEN_RATIO;
         //Allowed diff in pixel
         float eppsilon = 2;
-        float messured = textPaint.measureText("00:00:00");
+        float messured = textPaint.measureText(MEASURMENT_STRING);
         while (Math.abs(messured - aim) > eppsilon) {
             float average = (lowerBound + upperBound) / 2;
             textPaint.setTextSize(average);
-            messured = textPaint.measureText("00:00:00");
+            messured = textPaint.measureText(MEASURMENT_STRING);
             if (messured > aim) {
                 upperBound = average;
             } else {
