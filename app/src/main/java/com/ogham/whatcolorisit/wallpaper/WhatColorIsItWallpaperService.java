@@ -18,7 +18,6 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
     }
 
     private class WhatColorIsItEngine extends Engine {
-
         private boolean visible;
         private Handler handler;
         private WhatColorIsItWallpaper wallpaper;

@@ -114,7 +114,7 @@ public class WhatColorIsItWallpaper {
         textPaint.setTextSize(currentTextSize * TIME_CODE_RATIO);
         //remove alpha value
         color = color & 0xFFFFFF;
-        String colorText = String.format("#%X", color);
+        String colorText = String.format("#%06X", color);
         canvas.drawText(colorText, width / 2, height * positions.screenPosition + currentTextSize / 2, textPaint);
         textPaint.setTextSize(currentTextSize);
     }
