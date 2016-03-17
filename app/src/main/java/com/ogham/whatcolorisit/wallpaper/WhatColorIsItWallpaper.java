@@ -7,8 +7,8 @@ import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
 import com.ogham.whatcolorisit.data.TimeColorUtil;
-import com.ogham.whatcolorisit.preference.WallpaperPreferenceManager;
 import com.ogham.whatcolorisit.preference.ScreenPositions;
+import com.ogham.whatcolorisit.preference.WallpaperPreferenceManager;
 import com.ogham.whatcolorisit.util.LLog;
 
 /**
@@ -18,8 +18,6 @@ public class WhatColorIsItWallpaper {
     private static final LLog LOG = LLog.getLogger(WhatColorIsItWallpaper.class);
 
     private static final float TIME_CODE_RATIO = 0.25f;
-
-    private SurfaceHolder surfaceHolder;
 
     private Paint textPaint;
     private Paint backGroundPaint;
@@ -32,10 +30,9 @@ public class WhatColorIsItWallpaper {
     private int width;
     private int height;
 
-    public WhatColorIsItWallpaper(Context context, SurfaceHolder surfaceHolder) {
-        this.surfaceHolder = surfaceHolder;
-
+    public WhatColorIsItWallpaper(Context context) {
         backGroundPaint = new Paint();
+        backGroundPaint.setStyle(Paint.Style.FILL);
 
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
@@ -52,14 +49,7 @@ public class WhatColorIsItWallpaper {
         timeColor = manager.getColor();
     }
 
-    public void draw(SurfaceHolder holder, int width, int height) {
-
-        if (this.width != width || this.height != height) {
-            this.width = width;
-            this.height = height;
-            messureMaxTextSize();
-        }
-
+    public void draw(SurfaceHolder holder) {
         timeColor.updateTime();
         Canvas canvas = null;
         try {
@@ -80,7 +70,27 @@ public class WhatColorIsItWallpaper {
 
     private void drawBackground(Canvas canvas, int color) {
         backGroundPaint.setColor(color);
-        canvas.drawRect(0, 0, width, height, backGroundPaint);
+        canvas.drawPaint(backGroundPaint);
+    }
+
+    private void drawTime(Canvas canvas) {
+        canvas.drawText(timeColor.getTimeText(), width / 2, height * positions.screenPosition, textPaint);
+    }
+
+    private void drawColorCode(Canvas canvas, int color) {
+        float currentTextSize = textPaint.getTextSize();
+        textPaint.setTextSize(currentTextSize * TIME_CODE_RATIO);
+        //remove alpha value
+        color = color & 0xFFFFFF;
+        String colorText = String.format("#%06X", color);
+        canvas.drawText(colorText, width / 2, height * positions.screenPosition + currentTextSize / 2, textPaint);
+        textPaint.setTextSize(currentTextSize);
+    }
+
+    public void onSizeChanged(int width, int height) {
+        this.width = width;
+        this.height = height;
+        messureMaxTextSize();
     }
 
     private void messureMaxTextSize() {
@@ -103,19 +113,5 @@ public class WhatColorIsItWallpaper {
             }
         }
         LOG.d("Found max size: " + textPaint.getTextSize());
-    }
-
-    private void drawTime(Canvas canvas) {
-        canvas.drawText(timeColor.getTimeText(), width / 2, height * positions.screenPosition, textPaint);
-    }
-
-    private void drawColorCode(Canvas canvas, int color) {
-        float currentTextSize = textPaint.getTextSize();
-        textPaint.setTextSize(currentTextSize * TIME_CODE_RATIO);
-        //remove alpha value
-        color = color & 0xFFFFFF;
-        String colorText = String.format("#%06X", color);
-        canvas.drawText(colorText, width / 2, height * positions.screenPosition + currentTextSize / 2, textPaint);
-        textPaint.setTextSize(currentTextSize);
     }
 }

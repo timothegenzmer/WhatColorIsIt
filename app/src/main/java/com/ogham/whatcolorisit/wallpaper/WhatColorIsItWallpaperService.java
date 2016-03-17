@@ -25,7 +25,7 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
         private Runnable drawRunner = new Runnable() {
             @Override
             public void run() {
-                wallpaper.draw(getSurfaceHolder(), width, height);
+                wallpaper.draw(getSurfaceHolder());
                 handler.removeCallbacks(this);
                 if (visible) {
                     handler.postDelayed(this, 1000);
@@ -33,16 +33,13 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
             }
         };
 
-        private int width;
-        private int height;
-
         private WhatColorIsItEngine() {
             LOG.v("Engine created");
+
+            wallpaper = new WhatColorIsItWallpaper(WhatColorIsItWallpaperService.this);
+
             handler = new Handler();
-
             handler.post(drawRunner);
-
-            wallpaper = new WhatColorIsItWallpaper(WhatColorIsItWallpaperService.this, getSurfaceHolder());
         }
 
         @Override
@@ -59,8 +56,7 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
         public void onSurfaceChanged(SurfaceHolder holder, int format,
                                      int width, int height) {
             LOG.d("surface changed");
-            this.width = width;
-            this.height = height;
+            wallpaper.onSizeChanged(width, height);
             super.onSurfaceChanged(holder, format, width, height);
         }
 
