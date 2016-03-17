@@ -38,7 +38,7 @@ public class WhatColorIsItWallpaper {
     /**
      * number between 0 and 1
      */
-    private float currentStep;
+    private float currentStep = 0.5f;
 
     public WhatColorIsItWallpaper(Context context) {
         backGroundPaint = new Paint();
@@ -57,6 +57,10 @@ public class WhatColorIsItWallpaper {
     private void loadOptions() {
         positions = manager.getScreenPosition();
         timeColor = manager.getColor();
+    }
+
+    public void reloadSettings() {
+        loadOptions();
     }
 
     public void draw(SurfaceHolder holder) {
@@ -97,15 +101,16 @@ public class WhatColorIsItWallpaper {
         textPaint.setTextSize(currentTextSize);
     }
 
-    private int getTextPosition() {
+    private float getTextPosition() {
         return width / 2 - getStepOffset();
     }
 
-    private int getStepOffset() {
-        return (int) ((currentStep - 0.5) * width * MOVEMENT);
+    private float getStepOffset() {
+        return (currentStep - 0.5f) * width * MOVEMENT;
     }
 
     public void onOffsetChanged(float currentStep) {
+        LOG.d("offset changed: " + currentStep);
         this.currentStep = currentStep;
     }
 

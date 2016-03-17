@@ -46,9 +46,11 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
         @Override
         public void onOffsetsChanged(float xOffset, float yOffset, float xOffsetStep, float yOffsetStep, int xPixelOffset, int yPixelOffset) {
             super.onOffsetsChanged(xOffset, yOffset, xOffsetStep, yOffsetStep, xPixelOffset, yPixelOffset);
-            wallpaper.onOffsetChanged(xOffset);
-            if(visible) {
-                wallpaper.draw(getSurfaceHolder());
+            if (xOffsetStep > 0) {
+                wallpaper.onOffsetChanged(xOffset);
+                if (visible) {
+                    wallpaper.draw(getSurfaceHolder());
+                }
             }
         }
 
@@ -56,6 +58,7 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
         public void onVisibilityChanged(boolean visible) {
             this.visible = visible;
             if (visible) {
+                wallpaper.reloadSettings();
                 handler.post(drawRunner);
             } else {
                 handler.removeCallbacks(drawRunner);
@@ -65,9 +68,10 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
         @Override
         public void onSurfaceChanged(SurfaceHolder holder, int format,
                                      int width, int height) {
+            super.onSurfaceChanged(holder, format, width, height);
+
             LOG.d("surface changed");
             wallpaper.onSizeChanged(width, height);
-            super.onSurfaceChanged(holder, format, width, height);
         }
 
         @Override
