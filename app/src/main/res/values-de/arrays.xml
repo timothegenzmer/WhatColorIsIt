@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="pref_screenposition_entries">
+    <item>Oben</item>
+    <item>Mitte</item>
+    <item>Unten</item>
+  </string-array>
+
+  <string-array name="pref_coloroptions_entries">
+    <item>Normal</item>
+    <item>Volles Farbspektrum</item>
+    <item>Helle Farben</item>
+  </string-array>
+</resources>
