@@ -8,14 +8,11 @@ import com.ogham.whatcolorisit.data.FullRangeColor;
 import com.ogham.whatcolorisit.data.LightColor;
 import com.ogham.whatcolorisit.data.NormalColor;
 import com.ogham.whatcolorisit.data.TimeColorUtil;
-import com.ogham.whatcolorisit.util.LLog;
 
 /**
  * Created by Timothe on 21.12.2014.
  */
 public class WallpaperPreferenceManager {
-    private static final LLog LOG = LLog.getLogger(WallpaperPreferenceManager.class);
-
     private SharedPreferences sharedPref;
 
     public WallpaperPreferenceManager(Context context) {
@@ -38,8 +35,7 @@ public class WallpaperPreferenceManager {
             case LIGHT:
                 return new LightColor();
             default:
-                LOG.e("default case");
-                return null;
+                throw new IllegalStateException("unknown case " + color);
         }
     }
 }
