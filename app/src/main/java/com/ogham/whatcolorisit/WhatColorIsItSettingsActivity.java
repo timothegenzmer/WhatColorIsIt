@@ -3,6 +3,8 @@ package com.ogham.whatcolorisit;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+import com.ogham.whatcolorisit.util.LLog;
+
 /**
  * Created by Timothe on 17.12.2014.
  */
