@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.ogham.whatcolorisit.data.FullRangeColor;
+import com.ogham.whatcolorisit.data.GammaColor;
 import com.ogham.whatcolorisit.data.LightColor;
 import com.ogham.whatcolorisit.data.NormalColor;
 import com.ogham.whatcolorisit.data.TimeColorUtil;
@@ -17,6 +18,10 @@ public class WallpaperPreferenceManager {
 
     public WallpaperPreferenceManager(Context context) {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public boolean showClock() {
+        return sharedPref.getBoolean("pref_show_clock", true);
     }
 
     public ScreenPositions getScreenPosition() {
@@ -34,6 +39,8 @@ public class WallpaperPreferenceManager {
                 return new FullRangeColor();
             case LIGHT:
                 return new LightColor();
+            case GAMMA:
+                return new GammaColor();
             default:
                 throw new IllegalStateException("unknown case " + color);
         }

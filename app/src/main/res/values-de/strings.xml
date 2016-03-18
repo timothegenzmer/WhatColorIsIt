@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">What Color is it</string>
   <string name="action_settings">Einstellungen</string>
   <string name="pref_coloroptions">Farboptionen</string>
   <string name="pref_screenposition">Bildschirmposition</string>
+  <string name="show_clock">Uhr anzeigen</string>
 </resources>

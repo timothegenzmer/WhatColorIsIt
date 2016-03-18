@@ -6,5 +6,6 @@ package com.ogham.whatcolorisit.preference;
 public enum ColorPreferences {
     DEFAULT,
     FULL_RANGE,
-    LIGHT
+    LIGHT,
+    GAMMA
 }

@@ -10,5 +10,6 @@
     <item>Normal</item>
     <item>Volles Farbspektrum</item>
     <item>Helle Farben</item>
+    <item>Gamma</item>
   </string-array>
 </resources>

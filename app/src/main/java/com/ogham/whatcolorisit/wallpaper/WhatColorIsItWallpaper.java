@@ -26,11 +26,12 @@ public class WhatColorIsItWallpaper {
 
     private Paint textPaint;
     private Paint backGroundPaint;
-    private TimeColorUtil timeColor;
 
     private WallpaperPreferenceManager manager;
 
+    private TimeColorUtil timeColor;
     private ScreenPositions positions;
+    private boolean showClock;
 
     private int width;
     private int height;
@@ -57,6 +58,7 @@ public class WhatColorIsItWallpaper {
     private void loadOptions() {
         positions = manager.getScreenPosition();
         timeColor = manager.getColor();
+        showClock = manager.showClock();
     }
 
     public void reloadSettings() {
@@ -72,8 +74,10 @@ public class WhatColorIsItWallpaper {
                 int alpha = 0xFF << 24;
                 int color = alpha + timeColor.getColorCode();
                 drawBackground(canvas, color);
-                drawTime(canvas);
-                drawColorCode(canvas, color);
+                if (showClock) {
+                    drawTime(canvas);
+                    drawColorCode(canvas, color);
+                }
             }
         } finally {
             if (canvas != null) {
@@ -110,7 +114,6 @@ public class WhatColorIsItWallpaper {
     }
 
     public void onOffsetChanged(float currentStep) {
-        LOG.d("offset changed: " + currentStep);
         this.currentStep = currentStep;
     }
 

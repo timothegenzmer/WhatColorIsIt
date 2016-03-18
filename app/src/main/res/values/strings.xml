@@ -8,6 +8,7 @@
   <string name="action_settings">Settings</string>
   <string name="pref_screenposition">Screen Position</string>
   <string name="pref_coloroptions">Color options</string>
+  <string name="show_clock">Show Clock</string>
 
 
 </resources>

@@ -2,19 +2,25 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+  <CheckBoxPreference
+      android:defaultValue="true"
+      android:key="pref_show_clock"
+      android:title="@string/show_clock"/>
+
   <ListPreference
-      android:key="pref_screenposition"
-      android:title="@string/pref_screenposition"
+      android:defaultValue="@string/pref_screenposition_default"
+      android:dependency="pref_show_clock"
       android:dialogTitle="@string/pref_screenposition"
       android:entries="@array/pref_screenposition_entries"
       android:entryValues="@array/pref_screenposition_values"
-      android:defaultValue="@string/pref_screenposition_default"/>
+      android:key="pref_screenposition"
+      android:title="@string/pref_screenposition"/>
 
   <ListPreference
-      android:key="pref_coloroptions"
-      android:title="@string/pref_coloroptions"
+      android:defaultValue="@string/pref_coloroptions_default"
       android:dialogTitle="@string/pref_coloroptions"
       android:entries="@array/pref_coloroptions_entries"
       android:entryValues="@array/pref_coloroptions_values"
-      android:defaultValue="@string/pref_coloroptions_default"/>
+      android:key="pref_coloroptions"
+      android:title="@string/pref_coloroptions"/>
 </PreferenceScreen>
