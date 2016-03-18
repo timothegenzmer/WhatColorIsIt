@@ -17,8 +17,7 @@ public class LauncherActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(null);
-        
+
         Intent i = new Intent();
 
         if (Build.VERSION.SDK_INT > 15) {
