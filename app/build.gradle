@@ -8,6 +8,7 @@ android {
         applicationId "com.ogham.whatcolorisit"
         minSdkVersion 8
         targetSdkVersion 23
+
         versionCode 4
         versionName "0.7.2"
     }
