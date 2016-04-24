@@ -127,7 +127,7 @@ public class WhatColorIsItWallpaper {
         float lowerBound = 1;
         float upperBound = 1000;
 
-        float aim = width * TIME_TO_SCREEN_RATIO;
+        float aim = Math.min(width, height) * TIME_TO_SCREEN_RATIO;
         //Allowed diff in pixel
         float eppsilon = 2;
         float messured = textPaint.measureText(MEASURMENT_STRING);
