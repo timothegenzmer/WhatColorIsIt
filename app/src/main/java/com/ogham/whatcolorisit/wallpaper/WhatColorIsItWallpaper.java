@@ -47,7 +47,6 @@ public class WhatColorIsItWallpaper {
 
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
-        textPaint.setColor(Color.WHITE);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(150);
 
@@ -75,6 +74,8 @@ public class WhatColorIsItWallpaper {
                 int color = alpha + timeColor.getColorCode();
                 drawBackground(canvas, color);
                 if (showClock) {
+                    textPaint.setColor(getTextColor(color));
+
                     drawTime(canvas);
                     drawColorCode(canvas, color);
                 }
@@ -84,6 +85,31 @@ public class WhatColorIsItWallpaper {
                 holder.unlockCanvasAndPost(canvas);
             }
         }
+    }
+
+    private int getTextColor(int color) {
+        if (getRelativeLuminance(color) >= 0.5) {
+            return Color.BLACK;
+        } else {
+            return Color.WHITE;
+        }
+    }
+
+    private float getRelativeLuminance(int color) {
+        //https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+        float red = ((color >> 16) & 0xFF) / 255.F;
+        float green = ((color >> 8) & 0xFF) / 255.0F;
+        float blue = (color & 0xFF) / 255.0F;
+        float[] colors = {red, green, blue};
+        float[] adjusted = new float[colors.length];
+        for (int i = 0; i < colors.length; i++) {
+            if (colors[i] <= 0.03928) {
+                adjusted[i] = colors[i] / 12.92F;
+            } else {
+                adjusted[i] = (float) Math.pow((colors[i] + 0.055) / 1.055, 2.4);
+            }
+        }
+        return (float) (0.2126 * adjusted[0] + 0.7152 * adjusted[1] + 0.0722 * adjusted[2]);
     }
 
     private void drawBackground(Canvas canvas, int color) {
