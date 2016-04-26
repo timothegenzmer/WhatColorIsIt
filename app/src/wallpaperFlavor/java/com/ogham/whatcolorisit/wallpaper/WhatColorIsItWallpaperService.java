@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
 import android.view.SurfaceHolder;
 
+import com.ogham.whatcolorisit.preference.WallpaperPreferenceManager;
 import com.ogham.whatcolorisit.util.LLog;
 
 /**
@@ -36,11 +37,11 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
         private WhatColorIsItEngine() {
             LOG.v("Engine created");
 
-            wallpaper = new WhatColorIsItWallpaper(WhatColorIsItWallpaperService.this);
+            wallpaper = new WhatColorIsItWallpaper();
+            setWallpaperSettings();
 
             handler = new Handler();
             handler.post(drawRunner);
-
         }
 
         @Override
@@ -58,11 +59,18 @@ public class WhatColorIsItWallpaperService extends WallpaperService {
         public void onVisibilityChanged(boolean visible) {
             this.visible = visible;
             if (visible) {
-                wallpaper.reloadSettings();
+                setWallpaperSettings();
                 handler.post(drawRunner);
             } else {
                 handler.removeCallbacks(drawRunner);
             }
+        }
+
+        private void setWallpaperSettings() {
+            WallpaperPreferenceManager preferenceManager = new WallpaperPreferenceManager(WhatColorIsItWallpaperService.this);
+            wallpaper.setPositions(preferenceManager.getScreenPosition());
+            wallpaper.setShowClock(preferenceManager.showClock());
+            wallpaper.setTimeColor(preferenceManager.getColor());
         }
 
         @Override

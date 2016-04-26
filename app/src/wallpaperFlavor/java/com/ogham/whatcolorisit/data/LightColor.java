@@ -2,12 +2,10 @@ package com.ogham.whatcolorisit.data;
 
 import com.ogham.whatcolorisit.util.LLog;
 
-import java.util.Arrays;
-
 /**
  * Created by Timothe on 21.12.2014.
  */
-public class LightColor extends TimeColorUtil {
+public class LightColor extends TimeColor {
     private static final LLog LOG = LLog.getLogger(LightColor.class);
 
     @Override

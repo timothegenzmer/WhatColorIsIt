@@ -8,7 +8,7 @@ import com.ogham.whatcolorisit.data.FullRangeColor;
 import com.ogham.whatcolorisit.data.GammaColor;
 import com.ogham.whatcolorisit.data.LightColor;
 import com.ogham.whatcolorisit.data.NormalColor;
-import com.ogham.whatcolorisit.data.TimeColorUtil;
+import com.ogham.whatcolorisit.data.TimeColor;
 
 /**
  * Created by Timothe on 21.12.2014.
@@ -29,7 +29,7 @@ public class WallpaperPreferenceManager {
         return ScreenPositions.values()[preferenceValue];
     }
 
-    public TimeColorUtil getColor() {
+    public TimeColor getColor() {
         int preferenceValue = Integer.parseInt(sharedPref.getString("pref_coloroptions", "0"));
         ColorPreferences color = ColorPreferences.values()[preferenceValue];
         switch (color) {

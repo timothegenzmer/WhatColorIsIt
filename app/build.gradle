@@ -5,17 +5,26 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.ogham.whatcolorisit"
-        minSdkVersion 8
         targetSdkVersion 23
-
-        versionCode 4
-        versionName "0.7.2"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        watchfaceFlavor {
+            applicationId "com.ogham.whatcolorisit.wear"
+            minSdkVersion 21
+            versionCode 1
+            versionName "0.6"
+        }
+        wallpaperFlavor {
+            applicationId "com.ogham.whatcolorisit"
+            minSdkVersion 8
+            versionCode 5
+            versionName "0.7.3"
         }
     }
 }

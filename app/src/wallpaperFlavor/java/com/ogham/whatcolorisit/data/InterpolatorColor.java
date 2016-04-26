@@ -5,7 +5,7 @@ import com.ogham.whatcolorisit.util.Interpolator;
 /**
  * Created by Timothe on 17.03.2016.
  */
-public class InterpolatorColor extends TimeColorUtil {
+public class InterpolatorColor extends TimeColor {
 
     private Interpolator hourInterpolator;
     private Interpolator minSecInterpolator;

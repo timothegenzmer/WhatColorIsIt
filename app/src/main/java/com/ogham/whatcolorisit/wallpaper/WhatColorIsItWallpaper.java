@@ -6,7 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
-import com.ogham.whatcolorisit.data.TimeColorUtil;
+import com.ogham.whatcolorisit.data.NormalColor;
+import com.ogham.whatcolorisit.data.TimeColor;
 import com.ogham.whatcolorisit.preference.ScreenPositions;
 import com.ogham.whatcolorisit.preference.WallpaperPreferenceManager;
 import com.ogham.whatcolorisit.util.LLog;
@@ -27,9 +28,7 @@ public class WhatColorIsItWallpaper {
     private Paint textPaint;
     private Paint backGroundPaint;
 
-    private WallpaperPreferenceManager manager;
-
-    private TimeColorUtil timeColor;
+    private TimeColor timeColor;
     private ScreenPositions positions;
     private boolean showClock;
 
@@ -41,7 +40,11 @@ public class WhatColorIsItWallpaper {
      */
     private float currentStep = 0.5f;
 
-    public WhatColorIsItWallpaper(Context context) {
+    public WhatColorIsItWallpaper() {
+        this(ScreenPositions.MIDDLE, new NormalColor(), true);
+    }
+
+    public WhatColorIsItWallpaper(ScreenPositions screenPositions, TimeColor timeColor, boolean showClock) {
         backGroundPaint = new Paint();
         backGroundPaint.setStyle(Paint.Style.FILL);
 
@@ -50,18 +53,21 @@ public class WhatColorIsItWallpaper {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(150);
 
-        manager = new WallpaperPreferenceManager(context);
-        loadOptions();
+        this.timeColor = timeColor;
+        this.showClock = showClock;
+        this.positions = screenPositions;
     }
 
-    private void loadOptions() {
-        positions = manager.getScreenPosition();
-        timeColor = manager.getColor();
-        showClock = manager.showClock();
+    public void setTimeColor(TimeColor timeColor) {
+        this.timeColor = timeColor;
     }
 
-    public void reloadSettings() {
-        loadOptions();
+    public void setPositions(ScreenPositions positions) {
+        this.positions = positions;
+    }
+
+    public void setShowClock(boolean showClock) {
+        this.showClock = showClock;
     }
 
     public void draw(SurfaceHolder holder) {

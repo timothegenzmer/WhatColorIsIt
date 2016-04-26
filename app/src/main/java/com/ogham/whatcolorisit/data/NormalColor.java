@@ -1,12 +1,9 @@
 package com.ogham.whatcolorisit.data;
 
-import com.ogham.whatcolorisit.util.LLog;
-
 /**
  * Created by Timothe on 21.12.2014.
  */
-public class NormalColor extends TimeColorUtil {
-    private static final LLog LOG = LLog.getLogger(NormalColor.class);
+public class NormalColor extends TimeColor {
 
     @Override
     public int getColorCode() {

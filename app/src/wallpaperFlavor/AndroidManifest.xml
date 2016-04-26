@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ogham.whatcolorisit">
+
+    <application>
+        <activity
+            android:name="com.ogham.whatcolorisit.LauncherActivity"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.ogham.whatcolorisit.WhatColorIsItSettingsActivity"
+            android:exported="true" />
+
+        <service
+            android:name="com.ogham.whatcolorisit.wallpaper.WhatColorIsItWallpaperService"
+            android:enabled="true"
+            android:label="What Color is it?"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/what_color_is_it_wallpaper" />
+        </service>
+    </application>
+</manifest>

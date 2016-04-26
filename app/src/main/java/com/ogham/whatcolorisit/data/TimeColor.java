@@ -6,14 +6,14 @@ import java.util.Locale;
 /**
  * Created by Timothe on 12.12.2014.
  */
-public abstract class TimeColorUtil {
+public abstract class TimeColor {
 
     private Calendar c;
     protected int hour;
     protected int minute;
     protected int second;
 
-    public TimeColorUtil() {
+    public TimeColor() {
         c = Calendar.getInstance();
         updateTime();
     }
